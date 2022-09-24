@@ -1,0 +1,23 @@
+pipeline{
+ agent any
+ stages{
+    stage("build test and package"){
+       steps{
+          bat "mvn clean install"
+          bat "mvn test"
+          bat "mvn package"
+       }
+       post{
+         success{
+            archiveArtifacts: artifacts: '**/*.war'
+         }
+       }
+    }
+    stage("Run ansible management job"){
+       steps{
+			        build job:'card-app-deployment'
+			        }
+    }
+
+ }
+}
