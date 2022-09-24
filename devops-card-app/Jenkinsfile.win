@@ -9,7 +9,7 @@ pipeline{
        }
        post{
          success{
-            archiveArtifacts: artifacts: '**/*.war'
+            archiveArtifacts: artifacts: 'devops-card-app/target/*.war'
          }
        }
     }
